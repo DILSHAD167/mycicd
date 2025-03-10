@@ -45,3 +45,16 @@ jobs:
           body: "The latest build on branch ${{ github.ref }} failed. Check logs for details."
           to: "dilshadaws167@gmail.com"
           from: "GitHub Actions"
+      - name: Send Email on Failure
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "🚨 Build Failed: ${{ github.repository }}"
+          body: "The latest build on branch ${{ github.ref }} success. Check logs for details."
+          to: "dilshadaws167@gmail.com"
+          from: "GitHub Actions"
+
